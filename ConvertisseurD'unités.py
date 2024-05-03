@@ -1,0 +1,61 @@
+from tkinter import *
+
+def convertir():
+    unite_source = var_unite_source.get()
+    unite_destination = var_unite_destination.get()
+    valeur_source = float(entree_valeur.get())
+
+    # Ajoutez ici les conversions pour chaque unité
+
+    if unite_source == "Celsius" and unite_destination == "Fahrenheit":
+        valeur_destination = (valeur_source * 9/5) + 32
+    elif unite_source == "Fahrenheit" and unite_destination == "Celsius":
+        valeur_destination = (valeur_source - 32) * 5/9
+    elif unite_source == "Kilomètres" and unite_destination == "Miles":
+        valeur_destination = valeur_source * 0.621371
+    elif unite_source == "Miles" and unite_destination == "Kilomètres":
+        valeur_destination = valeur_source * 1.60934
+    else:
+        valeur_destination = valeur_source
+
+    lbl_resultat.config(text=str(valeur_destination))
+
+# Création de la fenêtre principale
+fenetre = Tk()
+fenetre.title("Convertisseur d'unités")
+fenetre.geometry("300x200")
+
+# Variables de contrôle
+var_unite_source = StringVar()
+var_unite_destination = StringVar()
+
+# Liste des unités disponibles
+unites = ["Celsius", "Fahrenheit", "Kilomètres", "Miles"]
+
+# Éléments de l'interface utilisateur
+lbl_unite_source = Label(fenetre, text="Unité source:")
+lbl_unite_source.pack()
+
+menu_unite_source = OptionMenu(fenetre, var_unite_source, *unites)
+menu_unite_source.pack()
+
+lbl_unite_destination = Label(fenetre, text="Unité destination:")
+lbl_unite_destination.pack()
+
+menu_unite_destination = OptionMenu(fenetre, var_unite_destination, *unites)
+menu_unite_destination.pack()
+
+lbl_valeur = Label(fenetre, text="Valeur:")
+lbl_valeur.pack()
+
+entree_valeur = Entry(fenetre)
+entree_valeur.pack()
+
+btn_convertir = Button(fenetre, text="Convertir", command=convertir)
+btn_convertir.pack()
+
+lbl_resultat = Label(fenetre, text="")
+lbl_resultat.pack()
+
+# Boucle principale
+fenetre.mainloop()
